@@ -1,0 +1,47 @@
+#!/bin/sh
+
+power_up()
+{
+		: "$((i = 0))"
+		: "$((j = 0))"
+
+		while [ $i -le 2 ]
+		do
+				while [ $j -le 3 ]
+				do
+						echo	Switching USB DEV ugent$i.$j on...
+						usbconfig -d ugen$i.$j power_on >/dev/null 2>&1
+						: "$((j = j + 1))"
+				done
+				: "$((j = 0))"
+				: "$((i = i + 1))"
+		done
+}
+
+power_down()
+{
+		: "$((i = 0))"
+		: "$((j = 0))"
+
+		while [ $i -le 2 ]
+		do
+				while [ $j -le 3 ]
+				do
+						echo	Switching USB DEV ugent$i.$j off...
+						usbconfig -d ugen$i.$j power_off >/dev/null 2>&1
+						: "$((j = j + 1))"
+				done
+				: "$((j = 0))"
+				: "$((i = i + 1))"
+		done
+}
+
+if [ $1 = "-d" ]
+then
+		power_down
+elif [ $1 = "-u" ]
+then
+		 power_up
+else
+		printf "USAGE:\npowerusb OPTION\n-d   Power Down\n-u   Power Up\n"
+fi
