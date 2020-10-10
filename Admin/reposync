@@ -1,0 +1,29 @@
+#!/bin/sh
+
+## base system
+echo "Fetching basesystem patches..."
+
+freebsd-update fetch
+
+echo "Done."
+## base system
+
+
+## pkg
+echo "Fetching binary package patches..."
+
+pkg update
+
+echo "Done."
+## pkg
+
+
+## porttree
+echo "Fetching porttree patches..."
+
+portsnap fetch
+portsnap extract
+portsnap update
+
+echo "Done."
+## porttree
